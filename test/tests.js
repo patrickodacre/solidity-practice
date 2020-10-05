@@ -29,3 +29,26 @@ describe("SimpleListUsingArray.newBook", () => {
         })
     })
 })
+
+describe("SimpleListUsingArray.commonOperations", () => {
+    beforeEach(async () => {
+        accounts = await web3.eth.getAccounts()
+
+        Contract = await _contract.new()
+    })
+
+    it("demo: request details for all books", async () => {
+        await Contract.newBook("To Kill a Mockingbird", "Harper Lee", {from: accounts[0]})
+        await Contract.newBook("The Count of Monte Cristo", "Alexandre Dumas", {from: accounts[0]})
+
+        const bookCount = await Contract.getBookCount()
+
+        const books = []
+        for (let i = 0; i < bookCount; i ++) {
+            books.push(await Contract.books(i))
+        }
+
+        assert.equals("To Kill a Mockingbird", books[0].title)
+        assert.equals("The Count of Monte Cristo", books[1].title)
+    })
+})

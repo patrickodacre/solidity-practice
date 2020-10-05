@@ -29,7 +29,7 @@ contract SimpleListUsingArray {
 
     // newBook adds a Book struct to the books array.
     // a NewBook event is emitted with the last index
-    // of the books array
+    // of the books array.
     function newBook(string memory _title, string memory _author)
         public
     {
@@ -41,6 +41,10 @@ contract SimpleListUsingArray {
 
     // == Views == //
 
+    // getBookCount returns the latest number of books
+    // stored in the contract. From the UI, then, it is
+    // simple to request the details for a specific book
+    // or for all books. See tests.js for an example.
     function getBookCount()
         public
         view
